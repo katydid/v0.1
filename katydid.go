@@ -131,5 +131,6 @@ accept _ = accept
 if contains(decString(main.Hello.World.value), "World") then world else noworld`,
 		Func:  Katydid,
 		Order: 3,
+		Help:  `See <a href="https://github.com/awalterschulze/katydid">https://github.com/awalterschulze/katydid</a>`,
 	})
 }

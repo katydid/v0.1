@@ -52,6 +52,7 @@ var boxes = Boxes([]*Box{})
 
 func main() {
 	flag.Parse()
+	fmt.Printf("running\n")
 
 	http.HandleFunc("/share/", Share)
 	http.HandleFunc("/shared/", Shared)
