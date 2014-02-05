@@ -153,12 +153,16 @@ var tailText = `
 
 var tableText = `
 <h2>{{.Title}}</h2>
-<table width="100%"><tr><td valign="top">
+<table width="100%"><tr><td valign="top" width="70%">
 <textarea autofocus="true" id="{{.Name}}src" spellcheck="false" onkeydown="keyHandler{{.Name}}(event);" onkeyup="auto{{.Name}}();">{{.Content}}</textarea>
 <div class="hints">
 (Shift-Enter to compile and run.)&nbsp;&nbsp;&nbsp;&nbsp;
 <input type="checkbox" id="auto{{.Name}}" value="checked" /> Compile and run after each keystroke
 </div>
+<td width="3%"/>
+<td width="27%">
+{{.Help}}
+</td>
 </tr>
 <tr>
 </td>

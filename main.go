@@ -68,6 +68,7 @@ type Box struct {
 	Content string
 	Func    func(w http.ResponseWriter, req *http.Request)
 	Path    string
+	Help    string
 	Order   int
 }
 
@@ -212,6 +213,7 @@ func Main(w http.ResponseWriter, req *http.Request) {
 		this.Title = box.Title
 		this.Func = box.Func
 		this.Content = box.Content
+		this.Help = box.Help
 		data, err := ioutil.ReadFile(filepath.Join(cwd, boxes[i].Name+".box"))
 		if err == nil {
 			this.Content = string(data)

@@ -20,8 +20,8 @@ import (
 	"net/http"
 	"path/filepath"
 
+	"code.google.com/p/gogoprotobuf/proto"
 	descriptor "code.google.com/p/gogoprotobuf/protoc-gen-gogo/descriptor"
-	"code.google.com/p/goprotobuf/proto"
 )
 
 func Protoc(w http.ResponseWriter, req *http.Request) {
@@ -94,7 +94,7 @@ func Protoc(w http.ResponseWriter, req *http.Request) {
 
 func init() {
 	register(&Box{
-		Title: "First",
+		Title: "Define a Protocol Buffer",
 		Name:  "one",
 		Content: `package main;
 
@@ -103,5 +103,9 @@ message Hello {
 }`,
 		Func:  Protoc,
 		Order: 1,
+		Help: `
+Protocol Buffers are a way of encoding structured data in an efficient yet extensible format. 
+For more information please see <a href="http://code.google.com/p/protobuf/">http://code.google.com/p/protobuf/</a>.
+`,
 	})
 }

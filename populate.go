@@ -92,7 +92,7 @@ func Go(w http.ResponseWriter, req *http.Request) {
 
 func init() {
 	register(&Box{
-		Title: "Second",
+		Title: "Populate a Protocol Buffer using Go",
 		Name:  "two",
 		Content: `package main
 
@@ -106,5 +106,8 @@ func Populate() (*Hello, error) {
 `,
 		Func:  Go,
 		Order: 2,
+		Help: `Go is a programming language. For more information see <a href="http://golang.org/">http://golang.org/</a>. 
+		If you have compiled the protocol buffer defined above then the Go code has already been generated and is ready to use.
+		Write a Populate function that returns the appropriate structure and an error.`,
 	})
 }

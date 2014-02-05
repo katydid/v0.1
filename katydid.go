@@ -120,7 +120,7 @@ func Katydid(w http.ResponseWriter, req *http.Request) {
 
 func init() {
 	register(&Box{
-		Title: "Third",
+		Title: "Write a Query",
 		Name:  "three",
 		Content: `root = main.Hello
 main.Hello = start
