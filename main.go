@@ -31,7 +31,7 @@ import (
 )
 
 var (
-	httpListen = flag.String("http", "127.0.0.1:4000", "host:port to listen on")
+	httpListen = flag.String("http", ":8080", "host:port to listen on")
 )
 
 type Boxes []*Box
@@ -188,6 +188,7 @@ func copyDir(source string, dest string) error {
 }
 
 func Main(w http.ResponseWriter, req *http.Request) {
+	fmt.Printf("main\n")
 	path := req.URL.Path[1:]
 	if len(path) == 0 {
 		http.Redirect(w, req, paths.NewTemp(), http.StatusFound)
