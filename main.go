@@ -100,7 +100,17 @@ func Share(w http.ResponseWriter, req *http.Request) {
 		writeError(w, err, nil)
 		return
 	}
-	w.Write([]byte(`<a href="../` + newShared + `">../` + newShared + `</a>`))
+	w.Write([]byte(`<html><head><title>Saved</title></head><body>
+		<h1>Saved</h1>
+		<p>
+		<a href="../` + newShared + `">Copy this link</a>
+		</p>
+		<p>
+		When this link is visited the data you have entered will be re-entered into the textboxes, <br/>
+		but the visitor will redirected to a new temporary link where they can start playing with your data again. <br/>
+		This preserves your data as a permanent reference.
+		</p>
+		</body></html>`))
 }
 
 func Shared(w http.ResponseWriter, req *http.Request) {

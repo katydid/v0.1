@@ -143,7 +143,15 @@ var tailFuncsText = `
 </script>
 </head>
 <body>
-<a href="../share/{{.}}">share</a>
+<h1>Welcome to Arborist</h1>
+<table width="100%">
+<tr><td valign="top" width="73%">
+Arborist allows you to study or rather play around with <a href="https://github.com/awalterschulze/katydid">katydid</a>. <br/>
+Katydid is currently in an experimental phase.
+</td>
+<td><a href="../share/{{.}}">Save And/Or Share</a></td></tr>
+</table>
+
 `
 
 var tailText = `

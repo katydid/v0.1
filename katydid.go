@@ -17,11 +17,13 @@ package main
 import (
 	"bytes"
 	"encoding/base64"
+	"errors"
 	"fmt"
 	"io/ioutil"
 	"net/http"
 	"os/exec"
 	"path/filepath"
+	"strings"
 
 	"code.google.com/p/gogoprotobuf/proto"
 	descriptor "code.google.com/p/gogoprotobuf/protoc-gen-gogo/descriptor"
@@ -112,7 +114,13 @@ func Katydid(w http.ResponseWriter, req *http.Request) {
 	w.Write([]byte(`<img src="data:image/png;base64,` + dot64String + `" alt="error displaying image"/>`))
 	w.Write([]byte("</td>"))
 	w.Write([]byte(`<td valign="top">`))
-	w.Write(out)
+	if strings.Contains(string(out), "true") {
+		w.Write([]byte(`The populated protocol buffer was recognized`))
+	} else if strings.Contains(string(out), "false") {
+		w.Write([]byte(`The populated protocol buffer was NOT recognized`))
+	} else {
+		writeError(w, errors.New("Something unexpected happened"), output)
+	}
 	w.Write([]byte("</td></tr></table>"))
 
 	return
@@ -131,6 +139,8 @@ accept _ = accept
 if contains(decString(main.Hello.World.value), "World") then world else noworld`,
 		Func:  Katydid,
 		Order: 3,
-		Help:  `See <a href="https://github.com/awalterschulze/katydid">https://github.com/awalterschulze/katydid</a>`,
+		Help: `Katydid is currently in an experimental phase. <br/>
+		Here you can describe a bottom up hedge automaton which will either recognize or not recognize the populated protocol buffer.
+		See <a href="https://github.com/awalterschulze/katydid">https://github.com/awalterschulze/katydid</a>`,
 	})
 }
