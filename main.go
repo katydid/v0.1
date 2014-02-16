@@ -31,7 +31,7 @@ import (
 )
 
 var (
-	httpListen = flag.String("http", ":80", "host:port to listen on")
+	httpListen = flag.String("http", ":8080", "host:port to listen on")
 )
 
 type Boxes []*Box

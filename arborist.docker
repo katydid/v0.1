@@ -56,4 +56,4 @@ RUN (cd /gopath/src/github.com/awalterschulze/arborist && go install .)
 
 CMD ["arborist"]
 USER daemon
-EXPOSE 80
+EXPOSE 8080
