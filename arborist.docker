@@ -51,6 +51,6 @@ RUN (cd /gopath/src/github.com/awalterschulze/katydid/exp/readable && make)
 RUN git clone https://github.com/awalterschulze/arborist /gopath/src/github.com/awalterschulze/arborist
 RUN (cd /gopath/src/github.com/awalterschulze/arborist && go install .)
 
-CMD ["arborist"]
+CMD ["arborist", "-http=:80"]
 USER daemon
-EXPOSE 8080
+EXPOSE 80
