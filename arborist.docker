@@ -44,6 +44,9 @@ RUN (cd /gopath/src/code.google.com/p/gogoprotobuf && make)
 
 RUN go get -v code.google.com/p/go.text/unicode/norm
 
+# Makes sure everything after ADD is always updated, since docker does not support caching after the ADD command.
+ADD . .
+
 RUN mkdir -p /gopath/src/github.com/awalterschulze
 RUN git clone https://github.com/awalterschulze/katydid /gopath/src/github.com/awalterschulze/katydid
 RUN (cd /gopath/src/github.com/awalterschulze/katydid/exp/readable && make)
