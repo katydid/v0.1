@@ -28,6 +28,7 @@ import (
 	"path/filepath"
 	"sort"
 	"strings"
+	"time"
 )
 
 var (
@@ -249,7 +250,7 @@ func Main(w http.ResponseWriter, req *http.Request) {
 
 func writeError(w http.ResponseWriter, err error, more []byte) {
 	w.WriteHeader(404)
-	w.Write([]byte("<pre>" + err.Error() + "\n" + string(more) + "</pre>"))
+	w.Write([]byte("<pre>" + time.Now().String() + ":" + err.Error() + "\n" + string(more) + "</pre>"))
 }
 
 func run(dir string, args ...string) ([]byte, []byte, error) {
@@ -259,8 +260,26 @@ func run(dir string, args ...string) ([]byte, []byte, error) {
 	cmd.Dir = dir
 	cmd.Stdout = &buf
 	cmd.Stderr = &errBuf
-	err := cmd.Run()
-	return buf.Bytes(), errBuf.Bytes(), err
+	ch := make(chan error, 1)
+	err := cmd.Start()
+	if err != nil {
+		return nil, nil, err
+	}
+	go func() {
+		err := cmd.Wait()
+		ch <- err
+	}()
+	select {
+	case err := <-ch:
+		return buf.Bytes(), errBuf.Bytes(), err
+	case <-time.After(30 * time.Second):
+		err := cmd.Process.Kill()
+		if err != nil {
+			return nil, nil, errors.New("execution timed out and command could not be killed: " + err.Error())
+		}
+		return nil, nil, errors.New("execution timed out please try again")
+	}
+	panic("unreachable")
 }
 
 func register(box *Box) {
