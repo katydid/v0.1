@@ -6,4 +6,4 @@ docker-build:
 	docker build -t arborist - < arborist.docker
 
 docker-run:
-	docker run -d -p 8080:8080 arborist
+	docker run -d -p 80:8080 arborist
