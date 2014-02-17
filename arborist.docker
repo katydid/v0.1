@@ -45,6 +45,7 @@ RUN (cd /gopath/src/code.google.com/p/gogoprotobuf && make)
 RUN go get -v code.google.com/p/go.text/unicode/norm
 
 RUN mkdir shared
+RUN chmod 777 shared
 
 ADD . /forceUpdateFromThisPoint/
 
