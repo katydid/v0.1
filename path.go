@@ -19,6 +19,7 @@ import (
 	"encoding/base64"
 	"os"
 	"path/filepath"
+	"strings"
 	"sync"
 )
 
@@ -38,7 +39,8 @@ func randURL(n int) string {
 	if err != nil {
 		panic(err)
 	}
-	return base64.URLEncoding.EncodeToString(b)
+	bb := base64.URLEncoding.EncodeToString(b)
+	return strings.Replace(bb, "=", "", -1)
 }
 
 func (this *Path) new(prefix string) string {
