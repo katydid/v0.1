@@ -16,6 +16,7 @@ package main
 
 import (
 	"bytes"
+	"fmt"
 	"io/ioutil"
 	"net/http"
 	"path/filepath"
@@ -23,8 +24,15 @@ import (
 
 func Go(w http.ResponseWriter, req *http.Request) {
 	var err error
-	// x is the base name for .go, .6, executable files
+
 	path := req.FormValue("path")
+
+	if !exists(filepath.Join(path, "one.box")) {
+		err = fmt.Errorf("Please remember to execute the previous textbox!")
+		writeError(w, err, nil)
+		return
+	}
+
 	src := filepath.Join(path, "two.box")
 
 	// write body to x.proto
