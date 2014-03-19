@@ -47,7 +47,7 @@ RUN go get -v code.google.com/p/go.text/unicode/norm
 RUN mkdir shared
 RUN chmod 777 shared
 
-ADD . /forceUpdateFromThisPoint/
+ADD ./Readme.md /forceUpdateFromThisPoint.md
 
 RUN mkdir -p /gopath/src/github.com/awalterschulze
 RUN git clone https://github.com/awalterschulze/katydid /gopath/src/github.com/awalterschulze/katydid

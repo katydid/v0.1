@@ -1,5 +1,5 @@
 docker-build:
-	sudo docker build -t arborist - < arborist.docker
+	sudo docker build -t arborist .
 
 docker-run:
 	sudo docker rm arborist-container | true
