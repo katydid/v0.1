@@ -57,6 +57,7 @@ func main() {
 
 	http.HandleFunc("/share/", Share)
 	http.HandleFunc("/shared/", Shared)
+	http.HandleFunc("/example/", Shared)
 	for _, box := range boxes {
 		http.HandleFunc("/func/"+box.Name, box.Func)
 	}
@@ -117,7 +118,7 @@ func Share(w http.ResponseWriter, req *http.Request) {
 func Shared(w http.ResponseWriter, req *http.Request) {
 	fmt.Printf("shared\n")
 	path := req.URL.Path[1:]
-	if len(path) <= 4 || !strings.HasPrefix(path, "shared") {
+	if len(path) <= 4 || !(strings.HasPrefix(path, "shared") || strings.HasPrefix(path, "example")) {
 		writeError(w, errors.New("path too short"), nil)
 		return
 	}

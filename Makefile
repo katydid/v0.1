@@ -22,3 +22,6 @@ docker-rebuild:
 
 docker-attach:
 	sudo docker attach arborist-container
+
+gofmt:
+	gofmt -l -s -w .
