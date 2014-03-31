@@ -28,10 +28,10 @@ import (
 
 	"code.google.com/p/gogoprotobuf/proto"
 	descriptor "code.google.com/p/gogoprotobuf/protoc-gen-gogo/descriptor"
-	"github.com/awalterschulze/katydid/exp/asm/ast"
-	"github.com/awalterschulze/katydid/exp/asm/compiler"
-	"github.com/awalterschulze/katydid/exp/asm/lexer"
-	"github.com/awalterschulze/katydid/exp/asm/parser"
+	"github.com/awalterschulze/katydid/asm/ast"
+	"github.com/awalterschulze/katydid/asm/compiler"
+	"github.com/awalterschulze/katydid/asm/lexer"
+	"github.com/awalterschulze/katydid/asm/parser"
 
 	"text/template"
 )
@@ -201,10 +201,10 @@ var benchStr string = `
 
 	import (
 		"testing"
-		"github.com/awalterschulze/katydid/exp/asm/ast"
-		"github.com/awalterschulze/katydid/exp/asm/compiler"
-		"github.com/awalterschulze/katydid/exp/asm/lexer"
-		"github.com/awalterschulze/katydid/exp/asm/parser"
+		"github.com/awalterschulze/katydid/asm/ast"
+		"github.com/awalterschulze/katydid/asm/compiler"
+		"github.com/awalterschulze/katydid/asm/lexer"
+		"github.com/awalterschulze/katydid/asm/parser"
 		"code.google.com/p/gogoprotobuf/proto"
 		descriptor "code.google.com/p/gogoprotobuf/protoc-gen-gogo/descriptor"
 	)

@@ -54,8 +54,8 @@ RUN git clone https://github.com/awalterschulze/katydid /gopath/src/github.com/a
 RUN (cd /gopath/src/github.com/awalterschulze/katydid/ && make)
 
 RUN mkdir example
-RUN (cd /gopath/src/github.com/awalterschulze/katydid/exp/asm/test && go test -c && ./test.test)
-RUN (mv /gopath/src/github.com/awalterschulze/katydid/exp/asm/test/example/* /example/)
+RUN (cd /gopath/src/github.com/awalterschulze/katydid/asm/test && go test -c && ./test.test)
+RUN (mv /gopath/src/github.com/awalterschulze/katydid/asm/test/example/* /example/)
 
 RUN git clone https://github.com/awalterschulze/arborist /gopath/src/github.com/awalterschulze/arborist
 RUN (cd /gopath/src/github.com/awalterschulze/arborist && go install .)
