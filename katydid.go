@@ -32,6 +32,8 @@ import (
 	"github.com/awalterschulze/katydid/asm/compiler"
 	"github.com/awalterschulze/katydid/asm/lexer"
 	"github.com/awalterschulze/katydid/asm/parser"
+	"github.com/awalterschulze/katydid/serialize/proto/scanner"
+	"github.com/awalterschulze/katydid/serialize/proto/tokens"
 
 	"text/template"
 )
@@ -107,12 +109,26 @@ func Katydid(w http.ResponseWriter, req *http.Request) {
 		Desc:  fmt.Sprintf("%#v", fileDescData),
 	}
 
-	e, err := compiler.Compile(rules, fileDescriptorSet)
+	protoTokens, err := tokens.NewZipped(rules, fileDescriptorSet)
 	if err != nil {
 		writeError(w, err, nil)
 		return
 	}
-	recog, err := e.Eval(data)
+
+	e, rootToken, err := compiler.Compile(rules, protoTokens)
+	if err != nil {
+		writeError(w, err, nil)
+		return
+	}
+
+	s := scanner.NewProtoScanner(protoTokens, rootToken)
+	err = s.Init(data)
+	if err != nil {
+		writeError(w, err, nil)
+		return
+	}
+
+	recog, err := e.Eval(s)
 	if err != nil {
 		writeError(w, err, nil)
 		return
@@ -205,6 +221,8 @@ var benchStr string = `
 		"github.com/awalterschulze/katydid/asm/compiler"
 		"github.com/awalterschulze/katydid/asm/lexer"
 		"github.com/awalterschulze/katydid/asm/parser"
+		"github.com/awalterschulze/katydid/serialize/proto/scanner"
+		"github.com/awalterschulze/katydid/serialize/proto/tokens"
 		"code.google.com/p/gogoprotobuf/proto"
 		descriptor "code.google.com/p/gogoprotobuf/protoc-gen-gogo/descriptor"
 	)
@@ -222,13 +240,21 @@ var benchStr string = `
 		if err != nil {
 			panic(err)
 		}
-		exec, err := compiler.Compile(rules, desc)
+		protoTokens, err := tokens.NewZipped(rules, desc)
 		if err != nil {
 			panic(err)
 		}
+		exec, rootToken, err := compiler.Compile(rules, protoTokens)
+		if err != nil {
+			panic(err)
+		}
+		s := scanner.NewProtoScanner(protoTokens, rootToken)
 		b.ResetTimer()
 		for i := 0; i < b.N; i++ {
-			if _, err := exec.Eval(buf); err != nil {
+			if err := s.Init(buf); err != nil {
+				panic(err)
+			}
+			if _, err := exec.Eval(s); err != nil {
 				panic(err)
 			}
 		}
@@ -246,7 +272,7 @@ start world = accept
 start _ = start
 accept _ = accept
 
-if contains(decString(main.Hello.World), "World") then world else noworld`,
+if contains($string(main.Hello.World), "World") then world else noworld`,
 		Func:  Katydid,
 		Order: 3,
 		Help: `Katydid is currently in an experimental phase. <br/>

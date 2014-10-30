@@ -17,49 +17,62 @@ FROM ubuntu
 RUN sed 's/main$/main universe/' -i /etc/apt/sources.list
 RUN apt-get update
 
-RUN apt-get install -y python-software-properties
-RUN apt-get install -y git
-RUN apt-get install -y wget
-RUN apt-get install -y mercurial
-RUN apt-get install -y build-essential
-RUN apt-get install -y protobuf-compiler
-RUN apt-get install -y graphviz
-RUN apt-get install -y net-tools
+RUN apt-get install -y python-software-properties git wget mercurial build-essential protobuf-compiler graphviz net-tools
 
-RUN wget 'https://go.googlecode.com/files/go1.2.linux-amd64.tar.gz'
-RUN tar -C / -xzf go1.2.linux-amd64.tar.gz
-RUN rm go1.2.linux-amd64.tar.gz
+ENV GOVERSION 1.3
+ENV GODOWNLOAD http://golang.org/dl/
+ENV GOFILENAME go$GOVERSION.linux-amd64.tar.gz
+RUN wget $GODOWNLOAD/$GOFILENAME && \
+	tar -C / -xzf $GOFILENAME && \
+	rm $GOFILENAME
+
 ENV GOROOT /go
-
-RUN mkdir gopath
 ENV GOPATH /gopath
 ENV PATH $PATH:$GOPATH/bin:$GOROOT/bin
 
-RUN mkdir -p /gopath/src/code.google.com/p
-RUN git clone https://code.google.com/p/gocc /gopath/src/code.google.com/p/gocc
-RUN (cd /gopath/src/code.google.com/p/gocc && git checkout gocc2 && go install ./...)
+RUN mkdir $GOPATH
+RUN mkdir -p $GOPATH/src/code.google.com/p
+RUN mkdir -p $GOPATH/src/github.com/awalterschulze
+RUN mkdir -p $GOPATH/src/github.com/katydid
 
-RUN git clone https://code.google.com/p/gogoprotobuf /gopath/src/code.google.com/p/gogoprotobuf
-RUN (cd /gopath/src/code.google.com/p/gogoprotobuf && make)
+ENV SHAREPATH shared
+RUN mkdir $SHAREPATH && \
+	chmod 777 $SHAREPATH
 
-RUN go get -v code.google.com/p/go.text/unicode/norm
+# RUN go get -v code.google.com/p/go.text/unicode/norm
+ENV GOTEXTPATH $GOPATH/src/code.google.com/p/go.text
+RUN hg clone https://code.google.com/p/go.text/ $GOTEXTPATH && \
+	(cd $GOTEXTPATH && hg checkout f8db539672d0 ) && \
+	(cd $GOTEXTPATH && go install ./... )
 
-RUN mkdir shared
-RUN chmod 777 shared
+ENV GOCCPATH /gopath/src/code.google.com/p/gocc
+RUN git clone https://code.google.com/p/gocc $GOCCPATH && \
+	(cd $GOCCPATH && git checkout 87a3f29bc7f9 ) && \
+	(cd $GOCCPATH && go install ./...)
 
-ADD ./README.md /forceUpdateFromThisPoint.md
+ENV GOGOPATH $GOPATH/src/code.google.com/p/gogoprotobuf
+RUN git clone https://code.google.com/p/gogoprotobuf $GOGOPATH && \
+	(cd $GOGOPATH && git checkout 6c9802773308 ) && \
+	(cd $GOGOPATH && make)
 
-RUN mkdir -p /gopath/src/github.com/awalterschulze
-RUN git clone https://github.com/awalterschulze/katydid /gopath/src/github.com/awalterschulze/katydid
-RUN (cd /gopath/src/github.com/awalterschulze/katydid/ && make)
+ENV KATYPATH $GOPATH/src/github.com/awalterschulze/katydid
+ENV EXAMPLEPATH example
+RUN git clone https://github.com/awalterschulze/katydid $KATYPATH && \
+	(cd $KATYPATH && git checkout e69e084bd1 ) && \
+	(cd $KATYPATH && make) && \
+	mkdir $EXAMPLEPATH && \
+	(cd $KATYPATH/asm/test && go test -c && ./test.test) && \
+	(mv $KATYPATH/asm/test/example/* /$EXAMPLEPATH/)
 
-RUN mkdir example
-RUN (cd /gopath/src/github.com/awalterschulze/katydid/asm/test && go test -c && ./test.test)
-RUN (mv /gopath/src/github.com/awalterschulze/katydid/asm/test/example/* /example/)
+ENV ARBOPATH $GOPATH/src/github.com/katydid/arborist
+EXPOSE 8080
+RUN mkdir $ARBOPATH
 
-RUN git clone https://github.com/awalterschulze/arborist /gopath/src/github.com/awalterschulze/arborist
-RUN (cd /gopath/src/github.com/awalterschulze/arborist && go install .)
+# run webserver
+RUN git clone https://github.com/katydid/arborist $ARBOPATH
+
+# development environment
+# ENTRYPOINT bash
 
 CMD ["arborist"]
 USER daemon
-EXPOSE 8080
