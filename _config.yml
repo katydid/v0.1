@@ -8,9 +8,9 @@ permalink:        pretty
 # Setup
 title:            Katydid
 tagline:          'Tree Grammars for Trees'
-url:              http://awalterschulze.github.io/katydid
+url:              http://katydid.github.io
 
-baseurl: '/katydid/'
+baseurl: '/'
 
 author:
   name:           'Walter Schulze'
@@ -22,7 +22,7 @@ paginate:         5
 version:          Under Heavy Development
 
 github:
-  repo:           https://github.com/awalterschulze/katydid
+  repo:           https://github.com/katydid/katydid
 
 gems:
   - jekyll-sitemap
