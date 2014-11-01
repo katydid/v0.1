@@ -70,7 +70,7 @@ RUN mkdir $ARBOPATH
 
 # run webserver
 RUN git clone https://github.com/katydid/arborist $ARBOPATH && \
-	go install .
+	(cd $ARBOPATH && go install .)
 CMD ["arborist"]
 USER daemon
 
