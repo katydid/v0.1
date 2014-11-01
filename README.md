@@ -3,7 +3,7 @@ arborist
 
 playground for katydid hacked from play.golang.org
 
-This is a website like play.golang.org for github.com/awalterschulze/katydid.
+This is a website like play.golang.org for github.com/katydid/katydid.
 It requires multiple text boxes each with a different purpose.
 
 1. Define a protocol buffer

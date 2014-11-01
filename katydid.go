@@ -28,12 +28,12 @@ import (
 
 	"code.google.com/p/gogoprotobuf/proto"
 	descriptor "code.google.com/p/gogoprotobuf/protoc-gen-gogo/descriptor"
-	"github.com/awalterschulze/katydid/asm/ast"
-	"github.com/awalterschulze/katydid/asm/compiler"
-	"github.com/awalterschulze/katydid/asm/lexer"
-	"github.com/awalterschulze/katydid/asm/parser"
-	"github.com/awalterschulze/katydid/serialize/proto/scanner"
-	"github.com/awalterschulze/katydid/serialize/proto/tokens"
+	"github.com/katydid/katydid/asm/ast"
+	"github.com/katydid/katydid/asm/compiler"
+	"github.com/katydid/katydid/asm/lexer"
+	"github.com/katydid/katydid/asm/parser"
+	"github.com/katydid/katydid/serialize/proto/scanner"
+	"github.com/katydid/katydid/serialize/proto/tokens"
 
 	"text/template"
 )
@@ -217,12 +217,12 @@ var benchStr string = `
 
 	import (
 		"testing"
-		"github.com/awalterschulze/katydid/asm/ast"
-		"github.com/awalterschulze/katydid/asm/compiler"
-		"github.com/awalterschulze/katydid/asm/lexer"
-		"github.com/awalterschulze/katydid/asm/parser"
-		"github.com/awalterschulze/katydid/serialize/proto/scanner"
-		"github.com/awalterschulze/katydid/serialize/proto/tokens"
+		"github.com/katydid/katydid/asm/ast"
+		"github.com/katydid/katydid/asm/compiler"
+		"github.com/katydid/katydid/asm/lexer"
+		"github.com/katydid/katydid/asm/parser"
+		"github.com/katydid/katydid/serialize/proto/scanner"
+		"github.com/katydid/katydid/serialize/proto/tokens"
 		"code.google.com/p/gogoprotobuf/proto"
 		descriptor "code.google.com/p/gogoprotobuf/protoc-gen-gogo/descriptor"
 	)
@@ -277,6 +277,6 @@ if contains($string(main.Hello.World), "World") then world else noworld`,
 		Order: 3,
 		Help: `Katydid is currently in an experimental phase. <br/>
 		Here you can describe a bottom up hedge automaton which will either recognize or not recognize the populated protocol buffer.
-		See <a href="https://github.com/awalterschulze/katydid">https://github.com/awalterschulze/katydid</a>`,
+		See <a href="https://github.com/katydid/katydid">https://github.com/katydid/katydid</a>`,
 	})
 }

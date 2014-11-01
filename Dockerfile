@@ -32,7 +32,6 @@ ENV PATH $PATH:$GOPATH/bin:$GOROOT/bin
 
 RUN mkdir $GOPATH
 RUN mkdir -p $GOPATH/src/code.google.com/p
-RUN mkdir -p $GOPATH/src/github.com/awalterschulze
 RUN mkdir -p $GOPATH/src/github.com/katydid
 
 ENV SHAREPATH shared
@@ -55,10 +54,10 @@ RUN git clone https://code.google.com/p/gogoprotobuf $GOGOPATH && \
 	(cd $GOGOPATH && git checkout 6c9802773308 ) && \
 	(cd $GOGOPATH && make)
 
-ENV KATYPATH $GOPATH/src/github.com/awalterschulze/katydid
+ENV KATYPATH $GOPATH/src/github.com/katydid/katydid
 ENV EXAMPLEPATH example
-RUN git clone https://github.com/awalterschulze/katydid $KATYPATH && \
-	(cd $KATYPATH && git checkout e69e084bd1 ) && \
+RUN git clone https://github.com/katydid/katydid $KATYPATH && \
+	(cd $KATYPATH && git checkout 38d9fad3fd142873f27c95b81c578c1e22293025 ) && \
 	(cd $KATYPATH && make) && \
 	mkdir $EXAMPLEPATH && \
 	(cd $KATYPATH/asm/test && go test -c && ./test.test) && \
@@ -69,11 +68,11 @@ EXPOSE 8080
 RUN mkdir $ARBOPATH
 
 # run webserver
-RUN git clone https://github.com/katydid/arborist $ARBOPATH && \
+# RUN git clone https://github.com/katydid/arborist $ARBOPATH && \
 	(cd $ARBOPATH && go install .)
-CMD ["arborist"]
-USER daemon
+# CMD ["arborist"]
+# USER daemon
 
 # development environment
-# ENTRYPOINT bash
+ENTRYPOINT bash
 
