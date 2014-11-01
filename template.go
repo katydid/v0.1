@@ -156,7 +156,7 @@ Katydid is currently in an experimental phase.
 
 var tailText = `
 <p>
-This website's code is available here <a href="https://github.com/awalterschulze/arborist">https://github.com/awalterschulze/arborist</a><br/>
+This website's code is available here <a href="https://github.com/katydid/arborist">https://github.com/katydid/arborist</a><br/>
 If you can hack it I won't be impressed, because I suspect it would be pretty easy. <br/>
 If you can and want to make it better please go ahead and fork it and send me a pull request. <br/>
 I am not a web developer and would appreciate the help.
