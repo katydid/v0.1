@@ -70,9 +70,9 @@ RUN mkdir $ARBOPATH
 
 # run webserver
 RUN git clone https://github.com/katydid/arborist $ARBOPATH
+CMD ["arborist"]
+USER daemon
 
 # development environment
 # ENTRYPOINT bash
 
-CMD ["arborist"]
-USER daemon
