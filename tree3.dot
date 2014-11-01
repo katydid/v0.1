@@ -1,0 +1,13 @@
+digraph Tree {
+	e2 [label="e"]
+	b1 [label="start"]
+	b2 [label="start"]
+	a [label="start"]
+	a -> b1
+	a -> b2
+	e1 [label="e"]
+	b1 -> e1
+	d [label="x"]
+	b1 -> d
+	b2 -> e2
+}

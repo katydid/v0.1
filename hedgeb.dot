@@ -1,0 +1,6 @@
+digraph B {
+	start -> one [label=" e "]
+	start -> start [label=" x "]
+	one:w -> one [label=" e "]
+	one:e -> one [label=" x "]
+}

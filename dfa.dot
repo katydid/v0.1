@@ -1,0 +1,13 @@
+digraph G {
+	"" [shape=none]
+	"" -> start
+	accept [shape=doublecircle]
+	start -> first [label=" a "]
+	start -> start [label=" b "]
+	first -> second [label=" a "]
+	first -> start [label=" b "]
+	second -> second [label=" a "]
+	second -> accept [label=" b "]
+	accept -> accept [label=" a "]
+	accept -> accept [label=" b "]
+}

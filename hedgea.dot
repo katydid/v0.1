@@ -1,0 +1,13 @@
+digraph A {
+	nodesep=1;
+	splines=true;
+	sep="+25,25";
+	graph [overlap = false];
+	accept [shape=doublecircle]
+	start -> one [label=" one "]
+	start -> start [label=" start "]
+	one -> accept [label=" one "]
+	one -> one [label=" start "]
+	accept:w -> accept [label=" one "]
+	accept:e -> accept [label=" start "]
+}

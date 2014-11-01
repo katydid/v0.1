@@ -1,0 +1,5 @@
+digraph Tree {
+	b2 [label="one"]
+	a [label="one"]
+	a -> b2
+}

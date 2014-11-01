@@ -1,0 +1,29 @@
+# Dependencies
+markdown:         redcarpet
+pygments:         true
+
+# Permalinks
+permalink:        pretty
+
+# Setup
+title:            Katydid
+tagline:          'Tree Grammars for Trees'
+url:              http://awalterschulze.github.io/katydid
+
+baseurl: '/katydid/'
+
+author:
+  name:           'Walter Schulze'
+  url:            https://plus.google.com/u/0/+WalterSchulzeA
+
+paginate:         5
+
+# Custom vars
+version:          Under Heavy Development
+
+github:
+  repo:           https://github.com/awalterschulze/katydid
+
+gems:
+  - jekyll-sitemap
+

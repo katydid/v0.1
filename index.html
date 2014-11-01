@@ -1,0 +1,103 @@
+---
+layout: default
+---
+
+<p>
+Katydid is a language based on Tree Grammars. Currently it only has an assembler for a validator which uses bottom up hedge (unranked tree) automata and functions on the leaves. In future a more intuitive language will be included that translates to this assembler.
+</p>
+
+<p>
+Katydid supports multiple types of trees:
+<ul>
+ <li> <a href="http://code.google.com/p/protobuf/">Protocol Buffers</a> </li>
+ <li> <a href="http://json.org/">Json</a> </li>
+ <li> <a href="http://golang.org/pkg/reflect">Reflected structures in Go</a> </li>
+</ul>
+Currently they all need to have a protocol buffer specification.
+</p>
+
+<p>
+Protocol buffers encode data structures. The encoded protocol buffers have a semi-unordered unranked tree structure, just like XML. Tree Automata have been found to be very applicable to XML processing. Katydid tries to do the same by applying Tree Automata to Protocol Buffers and other types of trees.
+</p>
+
+<h2>Ideals</h2>
+
+<ul>
+  <li>Fits into the theoretical model of Tree Grammars</li>
+  <li>Solves practical use cases</li>
+  <li>Fast</li>
+  <li>Decidable</li>
+  <li>Expressive</li>
+</ul>
+
+<h2>Name</h2>
+
+<a href="https://www.youtube.com/watch?v=SvjSP2xYZm8">True Facts About The Leaf Katydid</a>
+
+<h2>Language</h2>
+
+The current language reflects the proposed inner workings (assembler) of the final language, see <a href="https://github.com/awalterschulze/katydid/blob/master/asm/asm.bnf">BNF</a>.  This will be useful for debugging in future.
+The assembler is based on bottom up hedge (unranked tree) automata.
+
+<h2>Streaming Limitation</h2>
+
+<p>
+Katydid does some streaming processing which is incompatible with the merging feature of protocol buffers.
+Merging allows a marshaled protocol buffer to contain more than one instance of the same optional field.
+This assumes that the last instance will be unmarshaled as the actual value.
+Katydid always assumes the first instance is the actual value.
+This means Katydid will not always process protocol buffers, that have been marshaled with the merging feature, correctly.
+<p>
+
+<p>  
+For more information please, see <a href="https://developers.google.com/protocol-buffers/docs/encoding#optional">protocol buffer encoding documetation</a>.
+</p>
+
+<p>
+NoMerge is a function in gogoprotobuf that checks whether a marshaled protocol buffer has used this feature, see <a href="http://godoc.org/code.google.com/p/gogoprotobuf/fieldpath#NoMerge">gogoprotobuf fieldpath documentation</a>.
+</p>
+
+<h2>Next Steps</h2>
+
+<ul>
+  <li>Remove the dependancy on the protocol buffer specification</li>
+  <li>Create a usable language that translates to the current assembler language</li>
+  <li>Combine Katydid Automata seperated by Boolean Logic Operators (Possibly using alternating tree automata)</li>
+</ul>
+
+{% comment %}
+
+  <div class="posts">
+    {% for post in paginator.posts %}
+    <div class="post">
+      <h1 class="post-title">
+        <a href="{{ post.url }}">
+          {{ post.title }}
+        </a>
+      </h1>
+
+      <span class="post-date">{{ post.date | date_to_string }}</span>
+
+      {{ post.content }}
+    </div>
+    {% endfor %}
+  </div>
+
+  <div class="pagination">
+    {% if paginator.next_page %}
+      <a class="pagination-item older" href="{{ site.baseurl }}page{{paginator.next_page}}">Older</a>
+    {% else %}
+      <span class="pagination-item older">Older</span>
+    {% endif %}
+    {% if paginator.previous_page %}
+      {% if paginator.page == 2 %}
+        <a class="pagination-item newer" href="{{ site.baseurl }}">Newer</a>
+      {% else %}
+        <a class="pagination-item newer" href="{{ site.baseurl }}page{{paginator.previous_page}}">Newer</a>
+      {% endif %}
+    {% else %}
+      <span class="pagination-item newer">Newer</span>
+    {% endif %}
+  </div>
+
+{% endcomment %}
