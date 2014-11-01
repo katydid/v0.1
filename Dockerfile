@@ -68,11 +68,11 @@ EXPOSE 8080
 RUN mkdir $ARBOPATH
 
 # run webserver
-# RUN git clone https://github.com/katydid/arborist $ARBOPATH && \
+RUN git clone https://github.com/katydid/arborist $ARBOPATH && \
 	(cd $ARBOPATH && go install .)
-# CMD ["arborist"]
-# USER daemon
+CMD ["arborist"]
+USER daemon
 
 # development environment
-ENTRYPOINT bash
+# ENTRYPOINT bash
 
