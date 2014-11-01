@@ -6,11 +6,10 @@ pygments:         true
 permalink:        pretty
 
 # Setup
-title:            Katydid
+title:            'Katydid'
 tagline:          'Tree Grammars for Trees'
-url:              http://katydid.github.io
-
-baseurl: '/'
+url:
+baseurl:
 
 author:
   name:           'Walter Schulze'

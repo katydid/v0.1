@@ -25,7 +25,7 @@ For example we could have a DFA that recognises any string which contains a subs
 
 This is equivalent to the regular expression <i>.\*aab.\*</i>
 
-![Image]({{ site.baseurl }}public/dfa.dot.gif)
+![Image]({{ site.baseurl }}/public/dfa.dot.gif)
 
 The underscore character represents all other input symbols, which are not defined for the current state.
 This means that, since we only have <i>a</i> and <i>b</i> in our input alphabet, we could rewrite:
@@ -46,7 +46,7 @@ We will continue with this assumption for <b>accept</b>, but we will learn how t
 Trees
 -----
 
-![Image]({{ site.baseurl }}public/tree.dot.gif)
+![Image]({{ site.baseurl }}/public/tree.dot.gif)
 
 DFAs recognise strings while Tree Automata recognise trees.
 Hedge Automata are just Tree Automata for unranked trees.
@@ -92,7 +92,7 @@ Next we define DFAs for the parent nodes <i>a</i> and <i>b</i>:
 	<tr><td>one</td><td>_</td><td>=</td><td>one</td></tr>
 </table>
 
-![Image]({{ site.baseurl }}public/hedgeb.dot.gif)
+![Image]({{ site.baseurl }}/public/hedgeb.dot.gif)
 
 <table>
 	<tr><td colspan="4" align="center"><b>a: input alphabet = {start, one}</b></td></tr>
@@ -104,41 +104,41 @@ Next we define DFAs for the parent nodes <i>a</i> and <i>b</i>:
 	<tr><td>accept</td><td>_</td><td>=</td><td>accept</td></tr>
 </table>
 
-![Image]({{ site.baseurl }}public/hedgea.dot.gif)
+![Image]({{ site.baseurl }}/public/hedgea.dot.gif)
 
 Lets take our tree and run it through the hedge automaton.
 
-![Image]({{ site.baseurl }}public/tree.dot.gif)
+![Image]({{ site.baseurl }}/public/tree.dot.gif)
 
 First the leaves are turned into input symbols.
 
-![Image]({{ site.baseurl }}public/tree1.dot.gif)
+![Image]({{ site.baseurl }}/public/tree1.dot.gif)
 
 Next an instance of an appropriate DFA is started on each parent node.
 
-![Image]({{ site.baseurl }}public/tree2.dot.gif)
+![Image]({{ site.baseurl }}/public/tree2.dot.gif)
 
 Now input symbols are fed into the the first DFA.
 The DFA for node <i>b</i> is in state <i>start</i>, it reads <i>x</i> from its most left child, and it stays in state <i>start</i>.
 
-![Image]({{ site.baseurl }}public/tree3.dot.gif)
+![Image]({{ site.baseurl }}/public/tree3.dot.gif)
 
 Next it reads input symbol <i>e</i> and progresses to state <i>one</i>.
 
-![Image]({{ site.baseurl }}public/tree4.dot.gif)
+![Image]({{ site.baseurl }}/public/tree4.dot.gif)
 
 Finally it reads input symbol <i>x</i> and becomes an input symbol corresponding to its final state, <i>one</i>.
 
-![Image]({{ site.baseurl }}public/tree5.dot.gif)
+![Image]({{ site.baseurl }}/public/tree5.dot.gif)
 
 Now our root node reads input symbol <i>one</i> and goes from state <i>start</i> to state <i>one</i>.
 
-![Image]({{ site.baseurl }}public/tree6.dot.gif)
+![Image]({{ site.baseurl }}/public/tree6.dot.gif)
 
 Almost there. The other <i>b</i> node reads input symbol <i>e</i> and progresses from state <i>start</i> to state <i>one</i>.
 
-![Image]({{ site.baseurl }}public/tree7.dot.gif)
+![Image]({{ site.baseurl }}/public/tree7.dot.gif)
 
 Finally our root state reads input symbol <i>one</i> and progresses from state <i>one</i> to the <i>accept</i> state.
 
-![Image]({{ site.baseurl }}public/tree8.dot.gif)
+![Image]({{ site.baseurl }}/public/tree8.dot.gif)
