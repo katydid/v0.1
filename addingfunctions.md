@@ -58,7 +58,7 @@ type Bool interface {
 }
 {% endhighlight %}
 
-All function types are defined [here](https://github.com/katydid/katydid/blob/master/funcs/types.go).
+All function types are defined [here](https://github.com/katydid/v0.1/blob/master/funcs/types.go).
 
 Finally the `init` function registers the `contains` structure as a Katydid function.
 The first parameter is the function name, since this can differ from the structure name.
@@ -256,9 +256,9 @@ Sometimes you have a function that is dependant on a value that changes often,
 but you don't want to create a global variable which this function can access.
 You would prefer to inject this value into your function.
 
-Using the [Implements](http://godoc.org/github.com/katydid/katydid/asm/inject) function in the `inject` package you can retrieve all Katydid functions that satisfies a specific interface as a list.
+Using the [Implements](http://godoc.org/github.com/katydid/v0.1/asm/inject) function in the `inject` package you can retrieve all Katydid functions that satisfies a specific interface as a list.
 You can then range over this list calling a type of `Set` method to inject your value.
 
 This is quite an advanced function.
-Please see the [inject test](https://github.com/katydid/katydid/blob/master/asm/test/inject_test.go) for an example.
+Please see the [inject test](https://github.com/katydid/v0.1/blob/master/asm/test/inject_test.go) for an example.
 
